@@ -41,22 +41,23 @@ function divide(x, y) {
 }
 
 function calculate() {
-    let result = parseInt(display.textContent);
+    console.log("Calculating with " + operator);
+    console.log("val1: " + val1 + "val2: " + val2);
     switch (operator) {
         case -1:
-            return display.textContent = add(val1, result);
+            return display.textContent = add(val1, val2);
             break;
         case -2:
-            return display.textContent = substract(val1, result);
+            return display.textContent = substract(val1, val2);
             break;
         case -3:
-            return display.textContent = multiply(val1, result);
+            return display.textContent = multiply(val1, val2);
             break;
         case -4:
-            return display.textContent = divide(val1, result);
+            return display.textContent = divide(val1, val2);
             break;
         default:
-            display.textContent = "Something broke: op was" + operator;
+            display.textContent = "Something broke: opcode " + operator;
             break;
     }
 }
@@ -93,12 +94,17 @@ function operate() {
         //val1 = parseInt(display.textContent);
 
         if (value > -5 && !clearDisplay) {
+            val2 = parseInt(display.textContent);
             calculate();
             val1 = parseInt(display.textContent);
              //operator = value;
         }
         else if (value == -5){
+            if(val2 == undefined){
+                val2 = parseInt(display.textContent);
+            }
             calculate();
+            val1 = parseInt(display.textContent);
         }
     }
 
