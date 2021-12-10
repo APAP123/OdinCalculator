@@ -1,6 +1,7 @@
 let val1 = undefined;
 let val2 = undefined;
 let operator = undefined;
+let clearDisplay = false;
 
 const digitContainer = document.querySelector('.digits');
 const display = document.querySelector('.display');
@@ -17,7 +18,7 @@ function createDigits(){
         const digit = document.createElement('button');
         digit.setAttribute('class', i);
         digit.textContent = i;
-        digit.addEventListener('click', operate);
+        digit.addEventListener('click', populateDisplay);
         digitContainer.appendChild(digit);
     }
     
@@ -40,53 +41,69 @@ function divide(x, y) {
 }
 
 function calculate() {
+    let result = parseInt(display.textContent);
     switch (operator) {
         case -1:
-            return display.textContent = add(val1, val2);
+            return display.textContent = add(val1, result);
             break;
         case -2:
-            return display.textContent = substract(val1, val2);
+            return display.textContent = substract(val1, result);
             break;
         case -3:
-            return display.textContent = multiply(val1, val2);
+            return display.textContent = multiply(val1, result);
             break;
         case -4:
-            return display.textContent = divide(val1, val2);
+            return display.textContent = divide(val1, result);
             break;
         default:
-            display.textContent = "Something broke lawl";
+            display.textContent = "Something broke: op was" + operator;
             break;
     }
 }
 
-function operate() {
-    value = parseInt(this.getAttribute('class'));
+function populateDisplay() {
+    let value = this.getAttribute('class');
 
-    if(val1 === undefined && value >= 0){
-        console.log("Undefined!");
-        val1 = value;
+    if(clearDisplay){
+        if(val1 === undefined){
+            val1 = parseInt(display.textContent); // Store value that's currently in display
+        }
+        else {
+            val1 = parseInt(display.textContent);
+        }
         display.textContent = value;
+        clearDisplay = false;
     }
-    else if(val1 !== undefined && operator === undefined && value < 0){
-        console.log("operator!");
+    else {
+        display.textContent = display.textContent + value;
+    }
+
+    console.log("Digit Class: " + value);
+}
+
+function operate() {
+    //value = parseInt(this.getAttribute('class'));
+    let value = parseInt(this.getAttribute('class'));
+
+    if (operator === undefined && value > -5) {
         operator = value;
     }
-    else if(val2 === undefined && val1 !== undefined && operator !== undefined && value >= 0){
-        val2 = value;
-        display.textContent = value;
-    }
-    else if(val2 !== undefined && val1 !== undefined && operator !== undefined && value < 0){
-        val1 = calculate();
-        if(value != -5){
-            operator = value;
+    else {
+        //calculate();
+        //val1 = parseInt(display.textContent);
+
+        if (value > -5 && !clearDisplay) {
+            calculate();
+            val1 = parseInt(display.textContent);
+             //operator = value;
         }
-        else{
-            operator = undefined;
+        else if (value == -5){
+            calculate();
         }
-        val2 = undefined;
     }
 
-    console.log("Class: " + value);
+    console.log("OP Class: " + value);
+    clearDisplay = true;
 }
 
 createDigits();
