@@ -3,26 +3,31 @@ let val2 = undefined;
 let operator = undefined;
 let clearDisplay = false;
 
-const digitContainer = document.querySelector('.digits');
+// const digitContainer = document.querySelector('.digits');
 const display = document.querySelector('.display');
 
 const operatorContainer = document.querySelectorAll('.operations > button');
+const digitsContainer = document.querySelectorAll('.digit');
 
 operatorContainer.forEach((button) => {
     button.addEventListener('click', operate);
 });
 
-function createDigits(){
+digitsContainer.forEach((button) => {
+    button.addEventListener('click', populateDisplay);
+});
 
-    for (let i = 0; i < 10; i++) {
-        const digit = document.createElement('button');
-        digit.setAttribute('class', i);
-        digit.textContent = i;
-        digit.addEventListener('click', populateDisplay);
-        digitContainer.appendChild(digit);
-    }
+// function createDigits(){
+
+//     for (let i = 0; i < 10; i++) {
+//         const digit = document.createElement('button');
+//         digit.setAttribute('class', i);
+//         digit.textContent = i;
+//         digit.addEventListener('click', populateDisplay);
+//         digitContainer.appendChild(digit);
+//     }
     
-}
+// }
 
 function add(x, y){
     return x + y;
@@ -63,7 +68,7 @@ function calculate() {
 }
 
 function populateDisplay() {
-    let value = this.getAttribute('class');
+    let value = this.textContent;
 
     if(clearDisplay){
         if(val1 === undefined){
@@ -112,4 +117,4 @@ function operate() {
     clearDisplay = true;
 }
 
-createDigits();
+//createDigits();

@@ -1,0 +1,41 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-family: Helvetica;
+}
+
+button {
+    border: 2px solid #F9FAF8;
+    background-color: #3882F6;
+    color: #F9FAF8;
+    font-weight: bold;
+    font-size: larger;
+    border-radius: 6px;
+}
+
+.calculatorBody {
+    display: flex;
+    flex-direction: column;
+    font-size: large;
+}
+
+.buttons {
+    display: flex;
+}
+
+.digits {
+    display: flex;
+    flex-direction: column;
+}
+
+.digitRow {
+    display: flex;
+}
+
+.operations {
+    display: flex;
+    flex-direction: column;
+}
