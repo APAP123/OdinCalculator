@@ -49,13 +49,17 @@ function calculate() {
             return display.textContent = divide(val1, val2);
             break;
         default:
-            display.textContent = "Something broke: opcode " + operator;
+            display.textContent = "ERR: opcode " + operator;
             break;
     }
 }
 
 function populateDisplay() {
     let value = this.textContent;
+
+    if(display.textContent == '0') { // Clears placeholder 0
+        display.textContent = '';
+    }
 
     if(clearDisplay){
         if(val1 === undefined){

@@ -3,7 +3,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     font-family: Helvetica;
 }
 
@@ -17,15 +16,19 @@ button {
 }
 
 .display {
-    padding: 20%;
     border-radius: 6px;
     background-color: gray;
+    font-size: 500%;
+    font-weight: bold;
+    color: #F9FAF8;
+    text-align: right;
+    padding-top: 15px;
+    padding-right: 5px;
 }
 
 .calculatorBody {
     display: flex;
     flex-direction: column;
-    font-size: large;
     background-color: black;
     padding: 10px;
     border-radius: 6px;
@@ -34,7 +37,7 @@ button {
 
 .buttons {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
 }
 
 .digits {
@@ -44,7 +47,32 @@ button {
 
 .digitRow {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
+}
+
+.digitRow > button {
+    flex: 0 0 100px;
+    padding: 0px;
+}
+
+.digit:hover {
+    background-color: #2f65bd;
+}
+
+.digit:active {
+    background-color: #224783;
+}
+
+.operator {
+    background-color: indianred;
+}
+
+.operator:hover {
+    background-color: rgb(167, 76, 76);
+}
+
+.operator:active {
+    background-color: rgb(122, 56, 56);
 }
 
 .operations {
