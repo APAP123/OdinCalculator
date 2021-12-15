@@ -92,11 +92,12 @@ function operate() {
             val1 = parseInt(display.textContent);
         }
         else if (value == '='){
-            if(val2 == undefined){
-                val2 = parseInt(display.textContent);
-            }
+            val2 = parseInt(display.textContent);
             calculate();
             val1 = parseInt(display.textContent);
+        }
+        else {
+            operator = value;
         }
     }
 
