@@ -3,7 +3,6 @@ let val2 = undefined;
 let operator = undefined;
 let clearDisplay = false;
 
-// const digitContainer = document.querySelector('.digits');
 const display = document.querySelector('.display');
 
 const operatorContainer = document.querySelectorAll('.operator');
@@ -16,18 +15,6 @@ operatorContainer.forEach((button) => {
 digitsContainer.forEach((button) => {
     button.addEventListener('click', populateDisplay);
 });
-
-// function createDigits(){
-
-//     for (let i = 0; i < 10; i++) {
-//         const digit = document.createElement('button');
-//         digit.setAttribute('class', i);
-//         digit.textContent = i;
-//         digit.addEventListener('click', populateDisplay);
-//         digitContainer.appendChild(digit);
-//     }
-    
-// }
 
 function add(x, y){
     return x + y;
@@ -88,21 +75,17 @@ function populateDisplay() {
 }
 
 function operate() {
-    //value = parseInt(this.getAttribute('class'));
     let value = this.textContent;
 
     if (operator === undefined && value != '=') {
         operator = value;
     }
     else {
-        //calculate();
-        //val1 = parseInt(display.textContent);
 
         if (value != '=' && !clearDisplay) {
             val2 = parseInt(display.textContent);
             calculate();
             val1 = parseInt(display.textContent);
-             //operator = value;
         }
         else if (value == '='){
             if(val2 == undefined){
@@ -116,5 +99,3 @@ function operate() {
     console.log("OP Class: " + value);
     clearDisplay = true;
 }
-
-//createDigits();
