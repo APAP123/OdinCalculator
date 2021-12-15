@@ -6,7 +6,7 @@ let clearDisplay = false;
 // const digitContainer = document.querySelector('.digits');
 const display = document.querySelector('.display');
 
-const operatorContainer = document.querySelectorAll('.operations > button');
+const operatorContainer = document.querySelectorAll('.operator');
 const digitsContainer = document.querySelectorAll('.digit');
 
 operatorContainer.forEach((button) => {
@@ -49,16 +49,16 @@ function calculate() {
     console.log("Calculating with " + operator);
     console.log("val1: " + val1 + "val2: " + val2);
     switch (operator) {
-        case -1:
+        case '+':
             return display.textContent = add(val1, val2);
             break;
-        case -2:
+        case '-':
             return display.textContent = substract(val1, val2);
             break;
-        case -3:
+        case '*':
             return display.textContent = multiply(val1, val2);
             break;
-        case -4:
+        case '/':
             return display.textContent = divide(val1, val2);
             break;
         default:
@@ -89,22 +89,22 @@ function populateDisplay() {
 
 function operate() {
     //value = parseInt(this.getAttribute('class'));
-    let value = parseInt(this.getAttribute('class'));
+    let value = this.textContent;
 
-    if (operator === undefined && value > -5) {
+    if (operator === undefined && value != '=') {
         operator = value;
     }
     else {
         //calculate();
         //val1 = parseInt(display.textContent);
 
-        if (value > -5 && !clearDisplay) {
+        if (value != '=' && !clearDisplay) {
             val2 = parseInt(display.textContent);
             calculate();
             val1 = parseInt(display.textContent);
              //operator = value;
         }
-        else if (value == -5){
+        else if (value == '='){
             if(val2 == undefined){
                 val2 = parseInt(display.textContent);
             }
