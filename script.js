@@ -4,6 +4,9 @@ let operator = undefined;
 let clearDisplay = false;
 
 const display = document.querySelector('.display');
+const backButton = document.querySelector('.back');
+const decimal = document.querySelector('.decimal');
+const clear = document.querySelector('.clear');
 
 const operatorContainer = document.querySelectorAll('.operator');
 const digitsContainer = document.querySelectorAll('.digit');
@@ -15,6 +18,10 @@ operatorContainer.forEach((button) => {
 digitsContainer.forEach((button) => {
     button.addEventListener('click', populateDisplay);
 });
+
+backButton.addEventListener('click', backspace);
+decimal.addEventListener('click', addDecimal);
+clear.addEventListener('click', allClear);
 
 function add(x, y){
     return x + y;
@@ -54,6 +61,16 @@ function calculate() {
     }
 }
 
+function addDecimal() {
+    for (let i = 0; i < display.textContent.length; i++) {
+        if (display.textContent[i] == '.'){
+            return; // Returns if another decimal is found to prevent multiple decimals from being entered
+        }
+    }
+
+    display.textContent = display.textContent + '.';
+}
+
 function populateDisplay() {
     let value = this.textContent;
 
@@ -63,10 +80,10 @@ function populateDisplay() {
 
     if(clearDisplay){
         if(val1 === undefined){
-            val1 = parseInt(display.textContent); // Store value that's currently in display
+            val1 = parseFloat(display.textContent); // Store value that's currently in display
         }
         else {
-            val1 = parseInt(display.textContent);
+            val1 = parseFloat(display.textContent);
         }
         display.textContent = value;
         clearDisplay = false;
@@ -78,23 +95,44 @@ function populateDisplay() {
     console.log("Digit Class: " + value);
 }
 
+function backspace() {
+    if (display.textContent != '') {
+        display.textContent = display.textContent.substring(0, display.textContent.length-1);
+    }
+
+    if(display.textContent == '') {
+        display.textContent = '0';
+    }
+
+}
+
+function allClear() {
+    val1, val2, operator = undefined;
+    clearDisplay = false;
+    display.textContent = 0;
+}
+
 function operate() {
     let value = this.textContent;
 
     if (operator === undefined && value != '=') {
+        val1 = parseFloat(display.textContent);
         operator = value;
     }
     else {
 
         if (value != '=' && !clearDisplay) {
-            val2 = parseInt(display.textContent);
+            val2 = parseFloat(display.textContent);
             calculate();
-            val1 = parseInt(display.textContent);
+            val1 = parseFloat(display.textContent);
+            operator = value;
         }
         else if (value == '='){
-            val2 = parseInt(display.textContent);
+            if(val2 === undefined || clearDisplay == false){
+                val2 = parseFloat(display.textContent);
+            }
             calculate();
-            val1 = parseInt(display.textContent);
+            val1 = parseFloat(display.textContent);
         }
         else {
             operator = value;
