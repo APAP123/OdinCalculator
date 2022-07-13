@@ -36,12 +36,19 @@ function multiply(x, y) {
 }
 
 function divide(x, y) {
+    if( y == 0){
+        clearDisplay = true;
+        return "Nice try pal";
+    }
     return x / y;
 }
 
 function calculate() {
     console.log("Calculating with " + operator);
-    console.log("val1: " + val1 + "val2: " + val2);
+    console.log("val1: " + val1 + " val2: " + val2);
+    if( isNaN(val1) ){
+        val1 = 0
+    }
     switch (operator) {
         case '+':
             return display.textContent = add(val1, val2);
@@ -68,7 +75,13 @@ function addDecimal() {
         }
     }
 
-    display.textContent = display.textContent + '.';
+    if(clearDisplay) {
+        display.textContent = '0.';
+        clearDisplay = false;
+    }
+    else{
+        display.textContent = display.textContent + '.';
+    }
 }
 
 function populateDisplay() {
@@ -91,6 +104,9 @@ function populateDisplay() {
     else {
         display.textContent = display.textContent + value;
     }
+
+    // Truncate any values that would cause the display to overflow
+    display.textContent = display.textContent.substring(0, 9);
 
     console.log("Digit Class: " + value);
 }
@@ -119,24 +135,21 @@ function operate() {
         val1 = parseFloat(display.textContent);
         operator = value;
     }
+    else if (value != '=' && !clearDisplay) { // If operations are performed sequentially (ie without the equals sign in between operations)
+        val2 = parseFloat(display.textContent);
+        calculate();
+        val1 = parseFloat(display.textContent);
+        operator = value;
+    }
+    else if (value == '='){
+        if(val2 === undefined || clearDisplay == false){
+             val2 = parseFloat(display.textContent);
+        }
+        calculate();
+        val1 = parseFloat(display.textContent);
+     }
     else {
-
-        if (value != '=' && !clearDisplay) {
-            val2 = parseFloat(display.textContent);
-            calculate();
-            val1 = parseFloat(display.textContent);
-            operator = value;
-        }
-        else if (value == '='){
-            if(val2 === undefined || clearDisplay == false){
-                val2 = parseFloat(display.textContent);
-            }
-            calculate();
-            val1 = parseFloat(display.textContent);
-        }
-        else {
-            operator = value;
-        }
+        operator = value;
     }
 
     console.log("OP Class: " + value);
