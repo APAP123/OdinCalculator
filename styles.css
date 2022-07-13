@@ -79,3 +79,15 @@ button {
     display: flex;
     flex-direction: column;
 }
+
+.other {
+    background-color: orange;
+}
+
+.other:hover {
+    background-color: rgb(201, 130, 0);
+}
+
+.other:active {
+    background-color: rgb(156, 102, 0);
+}
